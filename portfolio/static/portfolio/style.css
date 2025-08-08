@@ -1,0 +1,24 @@
+/* style.css */
+@keyframes fadeIn {
+    from{
+        opacity: 10%;
+        transform: rotateZ(-20px);
+    }
+    to{
+        opacity: 10%;
+        transform: rotateY(0);
+    }
+    
+}
+
+body{
+    background-image: url("portfolio/Black-Light-Full-HD-Background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    color:#ffffff;text-align:start;animation:fadeIn 2.5s ease-out forwards;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}

@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'portfolio/style.css' %}?v=3">
+
+    <style>
+      .nav-button {
+        border-radius: 10px;
+        background-color: black;
+        color: azure;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        padding: 6px 12px;
+        margin-left: 5px;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      h2 {
+        margin: 20px 0;
+        font-size: 28px;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0px);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeinbright {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .project-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+     
+    </style>
+</head>
+
+<body style="background-color: black;">
+
+ 
+  <div style="display: flex; justify-content: space-between; align-items: center; border-radius: 10px; width: 100%; height: 40px; font-weight: 800; background-color: gray; padding: 0 20px;">
+    <div style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: white;">
+      PORTFOLIO
+    </div>
+    <div>
+      <a href="#about" class="nav-button">About</a>
+      <a href="#projects" class="nav-button">Projects</a>
+      <a href="mailto:niranjansundaram030@email.com" class="nav-button">Contact</a>
+    </div>
+  </div>
+
+ 
+  <div style="color: seashell; padding-left: 17px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:x-large;">
+    <h2>Hi there, I'm Niranjan. 👋<br>Thanks for visiting my portfolio!</h2>
+  </div>
+
+
+  <div class="project-card" style="
+      padding: 20px;
+      background-color: gainsboro;
+      border-radius: 15px;
+      border: 2px solid black;
+      position: fixed;
+      top: 100px;
+      right: 50px;
+      width: 300px;
+      text-align: center;
+      color: whitesmoke;
+      font-family: Arial, sans-serif;
+      animation: fadeinbright 2s ease-in-out forwards;">
+      
+    <img src="{% static 'portfolio/portfoliopicture.jpg' %}" alt="Profile" style="width: 300px; border-radius: 50%; margin-bottom: 10px;">
+    <h2 style="margin: 10px 0; color: gray;">Niranjan</h2>
+    <p style="font-size: 14px; color: gray;">
+      Python & Django Developer | Machine Learning Enthusiast
+    </p>
+    <a href="#projects"><button style="border-radius: 10px; background-color: black; color: azure; margin-bottom: 5px;">View Projects</button></a><br>
+    <a href="mailto:niranjansundaram030@email.com"><button style="border-radius: 10px; background-color: black; color: azure;">Contact Me</button></a>
+  </div>
+
+  
+  {% for project in projects %}
+  <div style="transition: transform 0.3s ease, box-shadow 0.3s ease;" 
+  onmouseover="this.style.transform='scale(1.05)'; " 
+  onmouseout="this.style.transform='scale(1)'; ">
+    <div class="project-card" style="
+        border: 2px solid black;
+        border-radius: 25px;
+        padding: 20px;
+        padding-left: 50px;
+        margin: 40px 10px;
+        width: 65%;
+        color: whitesmoke;
+        word-wrap: break-word;
+        background-color: rgba(128, 128, 128, 0.3);
+        opacity: 0.8;
+        animation: slideIn 1.5s ease forwards;"
+        >
+    
+    
+  <div>
+    
+    {% for img in project.images.all %}
+      <img style="width: 300px; height: 200px;"     src="{{ img.image.url }}" alt="Project Image" width="200">
+    {% endfor %}
+    <h2>{{ project.title }}</h2>
+    <p>{{ project.description }}</p>
+
+
+
+    {% if project.github_link %}
+      <a style="color: violet;" href="{{ project.github_link }}" target="_blank">GitHub</a>
+    {% endif %}
+  </div>
+
+  {% endfor %}
+
+</body>
+</html>
